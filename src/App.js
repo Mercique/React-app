@@ -1,5 +1,11 @@
 import logo from './logo.svg';
 import './App.css';
+import { Message } from './components/Message/message';
+
+const user = {
+  name: "Ilya",
+  surname: "Chvanov"
+};
 
 function App() {
   return (
@@ -17,6 +23,7 @@ function App() {
         >
           Learn React
         </a>
+        <Message user = { user } />
       </header>
     </div>
   );
