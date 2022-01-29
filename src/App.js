@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import { Message } from './components/Message/message';
+import { Counter } from './components/Counter/counter';
 
 const user = {
   name: "Ilya",
@@ -24,6 +25,7 @@ function App() {
           Learn React
         </a>
         <Message user = { user } />
+        <Counter />
       </header>
     </div>
   );
