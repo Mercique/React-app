@@ -1,12 +1,9 @@
 import "./message.sass";
 
-export const Message = (props) => {
-  const { user } = props;
-
+export const Message = ({ message }) => {
   return (
     <div className="react">
-      <h3 className="react__title">Hello React!</h3>
-      <h4 className="react__title-user">My name is { user.name } { user.surname }!</h4>
+      <span className="react__title-user">{ message.text } - { message.author }</span>
     </div>
   );
 };

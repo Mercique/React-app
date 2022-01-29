@@ -1,29 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
-import { Message } from './components/Message/message';
-
-const user = {
-  name: "Ilya",
-  surname: "Chvanov"
-};
+import "./App.css";
+import { Message } from "./components/Message/message";
+import { useState } from "react";
 
 function App() {
+  const [messageList, setMessageList] = useState([
+    { text: "Hi!", author: "Ilya" },
+    { text: "Hi! How are you?", author: "BOT" },
+    { text: "I'm good!", author: "Ilya" },
+    { text: "It's great!", author: "BOT" },
+  ]);
+
+  const handleAddMessage = (text) => {
+    setMessageList((prevMessageList) => [...prevMessageList, text]);
+  };
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <Message user = { user } />
+        {messageList.map((text) => (
+          <Message message = {text} />
+        ))}
+        <button type="button" onSubmit={handleAddMessage}>button</button>
       </header>
     </div>
   );
