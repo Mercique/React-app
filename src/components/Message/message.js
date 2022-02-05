@@ -2,6 +2,6 @@ import "./message.sass";
 
 export const Message = ({ message }) => {
   return (
-    <span className="App-header-text">{ message.text } - { message.author }</span>
+    <p className="App-header-msg">{ message.text } - <span className="App-header-msg-auth">{ message.author }</span></p>
   );
 };
