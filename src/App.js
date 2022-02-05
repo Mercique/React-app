@@ -12,13 +12,15 @@ function App() {
   };
 
   useEffect(() => {
-    if (messageList[messageList.length - 1] === undefined) {
-      return;
-    } else if (messageList[messageList.length - 1].author === "Ilya") {
-      setTimeout(() => {
+    let timeout;
+
+    if (messageList[messageList.length - 1]?.author === "Ilya") {
+      timeout = setTimeout(() => {
         handleAddMessage({text: "Hi! I'm robot!", author: "BOT"});
       }, 1500);
     }
+
+    return () => clearTimeout(timeout);
   }, [messageList]);
 
   return (
