@@ -1,7 +1,9 @@
-import "./message.sass";
+import "./message.scss";
 
 export const Message = ({ message }) => {
   return (
-    <p className="App-header-msg">{ message.text } - <span className="App-header-msg-auth">{ message.author }</span></p>
+    <p className="chat-inputs-msg">
+      {message.text} - {message.author}
+    </p>
   );
 };

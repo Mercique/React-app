@@ -1,0 +1,12 @@
+.send-form {
+  height: 50px;
+  display: flex;
+  margin-top: auto;
+  .MuiFormControl-root {
+    flex: 1;
+    .MuiOutlinedInput-root {
+      height: 100%;
+      color: #fff;
+    }
+  }
+}

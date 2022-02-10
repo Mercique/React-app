@@ -1,0 +1,12 @@
+.header {
+  height: 70px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding-left: calc(50% - 570px);
+  padding-right: calc(50% - 570px);
+  background: #20232a;
+  a {
+    text-decoration: none;
+  }
+}

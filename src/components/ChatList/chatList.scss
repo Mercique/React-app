@@ -1,0 +1,60 @@
+.message-content {
+  padding-top: 50px;
+  padding-left: calc(50% - 570px);
+  padding-right: calc(50% - 570px);
+  &-box {
+    width: 100%;
+    height: 519px;
+    display: flex;
+    background: #20232a;
+  }
+  &-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 15px 5px;
+  }
+  &-title {
+    margin: 0;
+  }
+  &-list {
+    width: 360px;
+    display: flex;
+    flex-direction: column;
+    background: #131418;
+    ul {
+      padding: 0;
+      overflow: auto;
+      background: #131418;
+    }
+    a {
+      position: relative;
+      text-decoration: none;
+      &:not(:last-child) {
+        li {
+          border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+        }
+      }
+      .del-btn {
+        display: none;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        cursor: pointer;
+      }
+    }
+    li {
+      color: #fff;
+      &:hover {
+        background:rgba(255, 255, 255, 0.25);
+        .del-btn {
+          display: block;
+        }
+      }
+      p {
+        opacity: .5;
+        color: #fff;
+      }
+    }
+  }
+}

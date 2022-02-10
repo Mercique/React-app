@@ -1,7 +1,7 @@
-import "./form.sass";
+import "./form.scss";
 import { useEffect, useRef, useState } from "react";
 import Button from "@mui/material/Button";
-import TextField from '@mui/material/TextField';
+import TextField from "@mui/material/TextField";
 
 export const Form = ({ onSubmit }) => {
   const [value, setValue] = useState("");
@@ -23,8 +23,15 @@ export const Form = ({ onSubmit }) => {
 
   return (
     <form className="send-form" onSubmit={handleSubmit}>
-      <TextField className="send-message" inputRef={textField} value={value} onChange={handleChange} />
-      <Button className="send-btn" type="submit" variant="contained">Send</Button>
+      <TextField
+        className="send-message"
+        inputRef={textField}
+        value={value}
+        onChange={handleChange}
+      />
+      <Button className="send-btn" type="submit" variant="contained">
+        Send
+      </Button>
     </form>
   );
 };
