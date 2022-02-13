@@ -6,9 +6,9 @@ import ListItemText from "@mui/material/ListItemText";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-export const list = [
+export let list = [
   {
     id: 1,
     img: "/static/images/avatar/1.jpg",
@@ -56,13 +56,18 @@ export const ChatList = () => {
     setList([
       ...listChats,
       {
-        id: `${listCount}`,
+        id: +`${listCount}`,
         img: `/static/images/avatar/${listCount}.jpg`,
         author: "User NEW",
         message: "Do you have Paris recommendations? Have you ever…",
       },
     ]);
   };
+
+  useEffect(() => {
+    console.log(listChats);
+    return list = listChats;
+  }, [listChats]);
 
   return (
     <div className="message-content">
