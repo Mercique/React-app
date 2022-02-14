@@ -1,26 +1,21 @@
 import "./chat.scss";
 import { useState, useEffect, useRef } from "react";
-import { Navigate, useParams } from "react-router";
+import { Navigate, useParams, useOutletContext } from "react-router";
 import { Form } from "../Form/form";
 import { MessageList } from "../messageList/messageList";
-import { list } from "../ChatList/chatList";
 
 export const Chat = () => {
   const params = useParams();
   const { chatId } = params;
   const messageEnd = useRef();
+  const listChats = useOutletContext();
 
-  const getChat = (list) => {
-    let chat = {};
-
-    list.forEach((item) => {
-      chat[`chat${item.id}`] = [];
-    });
-
-    return chat;
-  };
-
-  const [messageList, setMessageList] = useState({ ...getChat(list) });
+  const [messageList, setMessageList] = useState(
+    listChats.reduce((acc, cur) => {
+      acc[`chat${cur.id}`] = [];
+      return acc;
+    }, {})
+  );
 
   const handleAddMessage = (text) => {
     setMessageList((prevMessageList) => ({

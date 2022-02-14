@@ -6,9 +6,9 @@ import ListItemText from "@mui/material/ListItemText";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
-export let list = [
+const list = [
   {
     id: 1,
     img: "/static/images/avatar/1.jpg",
@@ -43,7 +43,6 @@ export let list = [
 
 export const ChatList = () => {
   const [listChats, setList] = useState(list);
-  const [listCount, setCount] = useState(list.length + 1);
 
   const delChat = (id) => {
     const index = listChats.findIndex((el) => el.id === id);
@@ -52,22 +51,16 @@ export const ChatList = () => {
   };
 
   const addChat = (listChats) => {
-    setCount(listCount + 1);
     setList([
       ...listChats,
       {
-        id: +`${listCount}`,
-        img: `/static/images/avatar/${listCount}.jpg`,
+        id: +`${listChats[listChats.length - 1].id + 1}`,
+        img: `/static/images/avatar/${listChats[listChats.length - 1].id + 1}.jpg`,
         author: "User NEW",
         message: "Do you have Paris recommendations? Have you ever…",
       },
     ]);
   };
-
-  useEffect(() => {
-    console.log(listChats);
-    return list = listChats;
-  }, [listChats]);
 
   return (
     <div className="message-content">
@@ -104,7 +97,7 @@ export const ChatList = () => {
             ))}
           </List>
         </div>
-        <Outlet />
+        <Outlet context={listChats} />
       </div>
     </div>
   );
