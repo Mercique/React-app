@@ -27,21 +27,25 @@
       background: #131418;
     }
     a {
-      position: relative;
       text-decoration: none;
-      .del-btn {
-        display: none;
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        cursor: pointer;
-        border: 1px solid #1976d280;
-        color: #fff;
-        background: #1976d280;
+    }
+    .del-btn {
+      display: none;
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      cursor: pointer;
+      border: 1px solid #1976d280;
+      color: #fff;
+      background: #1976d280;
+      &:hover {
+        border-color: #f16d7f;
+        background: #f16d7f;
       }
     }
     li {
+      position: relative;
       color: #fff;
       border-bottom: 1px solid rgba(255, 255, 255, 0.5);
       &:hover {
