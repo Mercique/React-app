@@ -1,9 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
 import { changeShowName } from "../../store/profile/actions";
+import { selectProfile } from "../../store/profile/selectors";
 
 export const Profile = () => {
+  const profile = useSelector(selectProfile);
   const dispatch = useDispatch();
-  const data = useSelector((state) => state);
 
   const showName = () => {
     dispatch(changeShowName);
@@ -12,7 +13,7 @@ export const Profile = () => {
   return (
     <>
       <input type="checkbox" onChange={showName}/>
-      {data.showName && <span>{data.name}</span>}
+      {profile.showName && <span>{profile.name}</span>}
     </>
   );
 };

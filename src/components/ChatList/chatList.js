@@ -16,7 +16,9 @@ export const ChatList = ({ chats, onAddChat, onDeleteChat }) => {
           <List
             sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
           >
-            {chats.map((item) => <ChatItem item={item} onDeleteChat={onDeleteChat} key={item.id}/>)}
+            {chats.map((item) => (
+              <ChatItem item={item} onDeleteChat={onDeleteChat} key={item.id} />
+            ))}
           </List>
         </div>
         <Outlet />

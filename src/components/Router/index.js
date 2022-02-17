@@ -3,83 +3,39 @@ import { BrowserRouter, Routes, Route, NavLink } from "react-router-dom";
 import { Chat } from "../Chat/chat";
 import { ChatList } from "../ChatList/chatList";
 import { Profile } from "../Profile/profile";
-import { useState } from "react";
-
-const listChats = [
-  {
-    id: 1,
-    img: "/static/images/avatar/1.jpg",
-    author: "Ali Connors",
-    message: "I'll be in your neighborhood doing errands this…",
-  },
-  {
-    id: 2,
-    img: "/static/images/avatar/2.jpg",
-    author: "Conor Adams",
-    message: "Wish I could come, but I'm out of town this…",
-  },
-  {
-    id: 3,
-    img: "/static/images/avatar/3.jpg",
-    author: "Sandra Adams",
-    message: "Do you have Paris recommendations? Have you ever…",
-  },
-  {
-    id: 4,
-    img: "/static/images/avatar/4.jpg",
-    author: "Ilya Mand",
-    message: "Do you have Paris recommendations? Have you ever…",
-  },
-  {
-    id: 5,
-    img: "/static/images/avatar/5.jpg",
-    author: "Ilya Mand",
-    message: "Do you have Paris recommendations? Have you ever…",
-  },
-];
-
-const listMessages = listChats.reduce((acc, cur) => {
-  acc[`chat${cur.id}`] = [];
-  return acc;
-}, {});
+import { useDispatch, useSelector } from "react-redux";
+import { addChat, deleteChat } from "../../store/chats/actions";
+import { selectChats } from "../../store/chats/selectors";
+import { selectMessages } from "../../store/messages/selectors";
+import { addMessage, deleteMessage } from "../../store/messages/actions";
 
 export const Router = () => {
-  const [chats, setChats] = useState(listChats);
-  const [messages, setMessages] = useState(listMessages);
+  const chats = useSelector(selectChats);
+  const messages = useSelector(selectMessages);
+  const dispatch = useDispatch();
 
   const handleAddMessage = (chatId, newMsg) => {
-    setMessages((prevMessageList) => ({
-      ...prevMessageList,
-      [chatId]: [...prevMessageList[chatId], newMsg],
-    }));
+    dispatch(addMessage(chatId, newMsg));
   };
 
   const handleAddChat = () => {
-    const newId = chats[chats.length - 1]?.id + 1 || 1;
+    const getId = chats[chats.length - 1]?.id + 1 || 1;
 
     const newChat = {
-      id: newId,
-      img: `/static/images/avatar/${newId}.jpg`,
+      id: getId,
+      img: `/static/images/avatar/${getId}.jpg`,
       author: "User NEW",
       message: "Do you have Paris recommendations? Have you ever…",
     };
 
-    setChats((prevChats) => [...prevChats, newChat]);
-    setMessages((prevMessages) => ({
-      ...prevMessages,
-      [`chat${newId}`]: [],
-    }));
+    const { id, img, author, message } = newChat;
+
+    dispatch(addChat(id, img, author, message));
   };
 
   const handleDeleteChat = (id) => {
-    setChats((prevChats) => prevChats.filter((chat) => chat.id !== id));
-    setMessages((prevMessages) => {
-      const newMsgs = { ...prevMessages };
-
-      delete newMsgs[`chat${id}`];
-
-      return newMsgs;
-    });
+    dispatch(deleteChat(id));
+    dispatch(deleteMessage(id));
   };
 
   return (
@@ -99,7 +55,16 @@ export const Router = () => {
         </NavLink>
       </header>
       <Routes>
-        <Route path="/" element={<ChatList chats={chats} />}></Route>
+        <Route
+          path="/"
+          element={
+            <ChatList
+              chats={chats}
+              onAddChat={handleAddChat}
+              onDeleteChat={handleDeleteChat}
+            />
+          }
+        ></Route>
         <Route
           path="/chats"
           element={
