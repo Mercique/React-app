@@ -18,11 +18,13 @@ export const Chat = ({ messages, addMessage }) => {
 
     let timeout;
 
-    if (
-      messages[chatId]?.[messages[chatId]?.length - 1]?.author === "User"
-    ) {
+    if (messages[chatId]?.[messages[chatId]?.length - 1]?.author === "User") {
       timeout = setTimeout(() => {
-        addMessage(chatId, { id: `msg-${Date.now()}`, text: "Hi! I'm robot!", author: "BOT" });
+        addMessage(chatId, {
+          id: `msg-${Date.now()}`,
+          text: "Hi! I'm robot!",
+          author: "BOT",
+        });
       }, 1500);
     }
 

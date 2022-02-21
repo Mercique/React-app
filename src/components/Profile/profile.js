@@ -12,7 +12,7 @@ export const Profile = () => {
 
   return (
     <>
-      <input type="checkbox" onChange={showName}/>
+      <input type="checkbox" onChange={showName} />
       {profile.showName && <span>{profile.name}</span>}
     </>
   );
