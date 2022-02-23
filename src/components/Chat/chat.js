@@ -3,14 +3,30 @@ import { useEffect, useRef } from "react";
 import { Navigate, useParams } from "react-router";
 import { Form } from "../Form/form";
 import { MessageList } from "../messageList/messageList";
+import { useDispatch, useSelector } from "react-redux";
+import { selectMessages } from "../../store/messages/selectors";
+import { addMessage } from "../../store/messages/actions";
 
-export const Chat = ({ messages, addMessage }) => {
+export const Chat = () => {
   const params = useParams();
   const { chatId } = params;
   const messageEnd = useRef();
 
-  const handleAddMessage = (text) => {
-    addMessage(chatId, text);
+  const messages = useSelector(selectMessages);
+  const dispatch = useDispatch();
+
+  const handleAddMessage = (newText) => {
+    sendMessage(newText, "User");
+  };
+
+  const sendMessage = (value, user) => {
+    const newMsg = {
+      id: `msg-${Date.now()}`,
+      text: value,
+      author: user
+    };
+    
+    dispatch(addMessage(chatId, newMsg));
   };
 
   useEffect(() => {
@@ -19,12 +35,9 @@ export const Chat = ({ messages, addMessage }) => {
     let timeout;
 
     if (messages[chatId]?.[messages[chatId]?.length - 1]?.author === "User") {
+      console.log(1);
       timeout = setTimeout(() => {
-        addMessage(chatId, {
-          id: `msg-${Date.now()}`,
-          text: "Hi! I'm robot!",
-          author: "BOT",
-        });
+        sendMessage("Hi! I'm robot!", "BOT");
       }, 1500);
     }
 

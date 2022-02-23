@@ -13,7 +13,7 @@ export const Form = ({ onSubmit }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit({ id: `msg-${Date.now()}`, text: value, author: "User" });
+    onSubmit(value);
     setValue("");
   };
 
