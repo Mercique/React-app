@@ -1,5 +1,4 @@
 export const ADD_MESSAGE = "MESSAGES::ADD_MESSAGE";
-export const DELETE_MESSAGE = "MESSAGES::DELETE_MESSAGE";
 
 export const addMessage = (chatId, newMsg) => {
   return {
@@ -8,9 +7,20 @@ export const addMessage = (chatId, newMsg) => {
   };
 };
 
-export const deleteMessage = (chatId, idToDelete) => {
-  return {
-    type: DELETE_MESSAGE,
-    payload: { chatId, idToDelete },
-  };
+let timeout;
+
+export const addMessageWithThunk = (chatId, newMsg) => (dispatch, getState) => {
+  dispatch(addMessage(chatId, newMsg));
+
+  if (newMsg.author !== "BOT") {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => {
+      const msgFromBOT = {
+        id: `msg-${Date.now()}`,
+        text: "I'm BOT you know??",
+        author: "User"
+      };
+      dispatch(addMessage(chatId, msgFromBOT));
+    }, 1000);
+  }
 };

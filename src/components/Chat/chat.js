@@ -5,7 +5,7 @@ import { Form } from "../Form/form";
 import { MessageList } from "../messageList/messageList";
 import { useDispatch, useSelector } from "react-redux";
 import { selectMessages } from "../../store/messages/selectors";
-import { addMessage } from "../../store/messages/actions";
+import { addMessageWithThunk } from "../../store/messages/actions";
 
 export const Chat = () => {
   const params = useParams();
@@ -26,23 +26,11 @@ export const Chat = () => {
       author: user
     };
     
-    dispatch(addMessage(chatId, newMsg));
+    dispatch(addMessageWithThunk(chatId, newMsg));
   };
 
   useEffect(() => {
     messageEnd.current?.scrollIntoView();
-
-    let timeout;
-
-    if (messages[chatId]?.[messages[chatId]?.length - 1]?.author === "User") {
-      console.log(1);
-      timeout = setTimeout(() => {
-        sendMessage("Hi! I'm robot!", "BOT");
-      }, 1500);
-    }
-
-    return () => clearTimeout(timeout);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [messages]);
 
   if (!messages[chatId]) {
