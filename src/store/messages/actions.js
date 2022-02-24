@@ -18,7 +18,7 @@ export const addMessageWithThunk = (chatId, newMsg) => (dispatch, getState) => {
       const msgFromBOT = {
         id: `msg-${Date.now()}`,
         text: "I'm BOT you know??",
-        author: "User"
+        author: "User",
       };
       dispatch(addMessage(chatId, msgFromBOT));
     }, 1000);

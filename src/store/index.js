@@ -27,7 +27,7 @@ const composeEnchancers =
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ['chats', 'messages'],
+  whitelist: ["chats", "messages"],
   //blacklist: ['profile'],
 };
 

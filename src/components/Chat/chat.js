@@ -23,9 +23,9 @@ export const Chat = () => {
     const newMsg = {
       id: `msg-${Date.now()}`,
       text: value,
-      author: user
+      author: user,
     };
-    
+
     dispatch(addMessageWithThunk(chatId, newMsg));
   };
 

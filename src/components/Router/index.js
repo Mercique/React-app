@@ -24,10 +24,7 @@ export const Router = () => {
       <Routes>
         <Route path="/" element={<ChatList />}></Route>
         <Route path="/chats" element={<ChatList />}>
-          <Route
-            path=":chatId"
-            element={<Chat />}
-          />
+          <Route path=":chatId" element={<Chat />} />
         </Route>
         <Route path="/profile" element={<Profile />}></Route>
         <Route path="*" element={<h2>404</h2>} />
