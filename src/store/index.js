@@ -5,11 +5,13 @@ import { messagesReducer } from "./messages/reducer";
 import thunk from "redux-thunk";
 import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import { foodReducer } from "./food/reducer";
 
 const rootReducer = combineReducers({
   profile: profileReducer,
   chats: chatsReducer,
   messages: messagesReducer,
+  food: foodReducer,
 });
 
 const composeEnchancers =
