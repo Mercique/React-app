@@ -2,26 +2,49 @@ import "./chatList.scss";
 import { Outlet } from "react-router-dom";
 import List from "@mui/material/List";
 import { ChatItem } from "./chatItem";
-import { useDispatch, useSelector } from "react-redux";
-import { selectChats } from "../../store/chats/selectors";
-import { addChat } from "../../store/chats/actions";
 import { Button } from "@mui/material";
+import { useEffect, useState } from "react";
+import { onChildAdded, onChildRemoved, set } from "firebase/database";
+import {
+  chatsRef,
+  getChatsRefById,
+  getMessagesRefByChatId,
+} from "../../services/firebase";
 
 export const ChatList = () => {
-  const chats = useSelector(selectChats);
-  const dispatch = useDispatch();
+  const [chats, setChats] = useState([]);
 
   const handleAddChat = () => {
     const getId = chats[chats.length - 1]?.id + 1 || 1;
 
     const newChat = {
+      id: getId,
       img: `/static/images/avatar/${getId}.jpg`,
       author: "User NEW",
       message: "Do you have Paris recommendations? Have you ever…",
     };
 
-    dispatch(addChat(getId, newChat));
+    set(getChatsRefById(getId), newChat);
+    set(getMessagesRefByChatId(getId), { empty: true });
   };
+
+  useEffect(() => {
+    const unsubscribe = onChildAdded(chatsRef, (snapshot) => {
+      setChats((prevChats) => [...prevChats, snapshot.val()]);
+    });
+
+    return unsubscribe;
+  }, []);
+
+  useEffect(() => {
+    const unsubscribe = onChildRemoved(chatsRef, (snapshot) => {
+      setChats((prevChats) =>
+        prevChats.filter(({ id }) => id !== snapshot.val()?.id)
+      );
+    });
+
+    return unsubscribe;
+  }, []);
 
   return (
     <div className="message-content">

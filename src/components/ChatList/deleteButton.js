@@ -1,11 +1,10 @@
-import { useDispatch } from "react-redux";
-import { deleteChat } from "../../store/chats/actions";
+import { remove } from "firebase/database";
+import { getChatsRefById, getMessagesRefByChatId } from "../../services/firebase";
 
 export const DeleteButton = ({ id }) => {
-  const dispatch = useDispatch();
-
   const handleDeleteChat = () => {
-    dispatch(deleteChat(id));
+    remove(getChatsRefById(id));
+    remove(getMessagesRefByChatId(id));
   };
 
   return (
