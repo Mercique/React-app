@@ -53,7 +53,7 @@ export const Home = ({ isSignUp }) => {
       <form onSubmit={handleSubmit}>
         <input type="text" value={email} onChange={handleChangeEmail} />
         <input type="password" value={pass} onChange={handleChangePass} />
-        <button>Login</button>
+        <button>{isSignUp ? "SignUp" : "Login"}</button>
         {error && <span>{error}</span>}
       </form>
     </div>

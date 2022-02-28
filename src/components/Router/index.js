@@ -14,14 +14,6 @@ import { auth } from "../../services/firebase";
 export const Router = () => {
   const [authed, setAuthed] = useState(false);
 
-  const authorize = () => {
-    setAuthed(true);
-  };
-
-  const unauthorize = () => {
-    setAuthed(false);
-  };
-
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -72,7 +64,7 @@ export const Router = () => {
         </Route>
         <Route path="/food" element={<Food />}></Route>
         <Route path="/profile" element={<PrivateRoute authed={authed} />}>
-          <Route path="" element={<Profile onLogout={unauthorize} />} />
+          <Route path="" element={<Profile />} />
         </Route>
         <Route path="*" element={<h2>404</h2>} />
       </Routes>
