@@ -42,6 +42,7 @@ useEffect(() => {
   }, [chatId]);
 
   useEffect(() => {
+    setMessages([]);
     const unsubscribe = onChildAdded(
       getMessageListRefByChatId(chatId),
       (snapshot) => {
