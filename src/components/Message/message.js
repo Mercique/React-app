@@ -1,9 +1,9 @@
 import "./message.scss";
 
-export const Message = ({ message }) => {
+export const Message = ({ text, author }) => {
   return (
     <p className="chat-inputs-msg">
-      {message.text} - {message.author}
+      {text} - {author}
     </p>
   );
 };
