@@ -1,3 +1,4 @@
+import "./home.scss";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { login, signUp } from "../../services/firebase";
@@ -45,15 +46,15 @@ export const Home = ({ isSignUp }) => {
   };
 
   return (
-    <div>
+    <div className="auth">
       <h2>{isSignUp ? "SignUp" : "Login"}</h2>
-      <Link to={`${isSignUp ? "/" : "signup"}`}>
+      <Link to={`${isSignUp ? "/" : "signup"}`} className="link">
         {!isSignUp ? "SignUp" : "Login"}
       </Link>
-      <form onSubmit={handleSubmit}>
-        <input type="text" value={email} onChange={handleChangeEmail} />
-        <input type="password" value={pass} onChange={handleChangePass} />
-        <button>{isSignUp ? "SignUp" : "Login"}</button>
+      <form onSubmit={handleSubmit} className="auth-form">
+        <input type="text" value={email} onChange={handleChangeEmail} placeholder="E-mail" />
+        <input type="password" value={pass} onChange={handleChangePass} placeholder="Password" />
+        <button className="auth-btn">{isSignUp ? "SignUp" : "Login"}</button>
         {error && <span>{error}</span>}
       </form>
     </div>

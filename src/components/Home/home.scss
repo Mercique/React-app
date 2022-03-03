@@ -1,0 +1,24 @@
+.auth {
+  padding-left: calc(50% - 570px);
+  padding-right: calc(50% - 570px);
+  .link {
+    color: #61dafb;
+    &:hover {
+      color: #4499b1;
+    }
+    &:visited {
+      color: #f16d7f;
+    }
+  }
+  &-form {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 30px;
+  }
+  &-btn {
+    width: fit-content;
+    display: flex;
+  }
+}
